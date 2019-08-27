@@ -152,7 +152,11 @@
     //Spriteを描画
     sprite.snow.draw();
     sprite.snow_man.draw();
-    /*ここに演習 5 isHit関数を呼び出すコードを追加します*/
+    ///あたり判定
+    if (isHit(sprite.snow, sprite.snow_man)) {
+      hitJob()
+    }
+
     /*ここに演習 7 のタスク 1 手順 7 で処理数のカウントを追加します*/
     //ループを開始
     requestId = window.requestAnimationFrame(renderFrame);
@@ -163,8 +167,24 @@
     return containerWidth - itemWidth;
   }
 
-  /*ここに演習 5 で isHit 関数を記述します。*/
-  /*ここに演習 5 で hitJob 関数を記述します。*/
+  //あたり判定処理
+  function isHit(targetA, targetB) {
+    return (((targetA.x <= targetB.x && targetA.x + targetA.width > targetB.x)
+      || (targetB.x <= targetA.x && targetB.x + targetB.width > targetA.x))
+      && ((targetA.y <= targetB.y && targetA.y + targetA.height >= targetB.y)
+        || (targetB.y <= targetA.y && targetB.y + targetB.height >= targetA.y)));
+  }
+
+  //あたり判定の際の処理
+  function hitJob() {
+    ctx.font = 'bold 20px sans-serif';
+    ctx.fillStyle = 'red';
+    ctx.fillText('ヒットしました', getCenterPosition(canvas.clientWidth, 140), 160);
+    /*ここに演習 8 で gameRule.catched 関数を記述し、上の 3 行は削除します*/
+    /*ここに演習 7 のタスク 1 で画像を変更するコードを追加します*/
+    /*ここに演習 7 タスク 2 手順 3 でオーディオを再生するコードを追加します*/
+  }
+
   /*ここに演習 6 タスク 2 で getRandomPosition 関数を記述します。*/
   /*ここに演習 6 タスク 3 で loadCheck 関数を記述します。*/
 })();
