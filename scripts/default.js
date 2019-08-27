@@ -141,7 +141,11 @@
     requestId = window.requestAnimationFrame(renderFrame);
   }
 
-  /*ここに演習 4 タスク 1 で getRightLimitPosition関数を記述します。*/
+  //雪だるまを動かせる右の限界位置を算出する
+  function getRightLimitPosition(containerWidth, itemWidth) {
+    return containerWidth - itemWidth;
+  }
+
   /*ここに演習 5 で isHit 関数を記述します。*/
   /*ここに演習 5 で hitJob 関数を記述します。*/
   /*ここに演習 6 タスク 2 で getRandomPosition 関数を記述します。*/
