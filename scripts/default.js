@@ -56,7 +56,8 @@
     count: 7,
     //隣り合う 雪の結晶画像の x 位置の差分
     neighor_distance: 56,
-    /* ここに演習 6 タスク 2 で start_coefficient プロパティを記述します。*/
+    //開始時のマイナス値係数(出現を遅らせるため)
+    start_coefficient : -50,
     /* ここに演習 7 タスク 1 で switch_count プロパティを記述します。*/
   };
   /* ここに演習 7 タスク 1 でスプライト関連の変数をいくつか記述します。*/
@@ -90,8 +91,9 @@
         sprite_snow.dy = 1;
         sprite_snow.dx = SNOWS_MOVING_CONF.neighor_distance;
         sprite_snow.x = i * sprite_snow.dx;
-        /*演習 6 のタスク 2 ステップ 3 で
-        sprite_snow.y を getRandomPosition 関数でセット*/
+        sprite_snow.y = getRandomPosition(SNOWS_MOVING_CONF.count,
+          SNOWS_MOVING_CONF.start_coefficient);
+        /*ここに演習 7 の手順 1 ステップ 8 でコードを追加します*/
         /*ここに演習 7 のタスク 2 でオーディオ再生用のコードを追加します*/
         sprite.snows.push(sprite_snow);
         sprite_snow = null;
@@ -204,6 +206,9 @@
     /*ここに演習 7 タスク 2 手順 3 でオーディオを再生するコードを追加します*/
   }
 
-  /*ここに演習 6 タスク 2 で getRandomPosition 関数を記述します。*/
+  //雪の結晶の縦位置の初期値をランダムに設定する
+  function getRandomPosition(colCount, delayPos) {
+    return Math.floor(Math.random() * colCount) * delayPos;
+  }
   /*ここに演習 6 タスク 3 で loadCheck 関数を記述します。*/
 })();
