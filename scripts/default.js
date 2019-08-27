@@ -57,7 +57,7 @@
     //隣り合う 雪の結晶画像の x 位置の差分
     neighor_distance: 56,
     //開始時のマイナス値係数(出現を遅らせるため)
-    start_coefficient : -50,
+    start_coefficient: -50,
     /* ここに演習 7 タスク 1 で switch_count プロパティを記述します。*/
   };
   /* ここに演習 7 タスク 1 でスプライト関連の変数をいくつか記述します。*/
@@ -70,9 +70,8 @@
     canvas = document.getElementById('bg');
     //アニメーションの開始
     canvas.addEventListener('click', () => {
-      /*演習 6 のタスク 3 で loadCheck 関数を呼び出すように変更されます*/
       if (!requestId) {
-        renderFrame();
+        loadCheck();
       }
     });
     //2D コンテキストを取得
@@ -210,5 +209,15 @@
   function getRandomPosition(colCount, delayPos) {
     return Math.floor(Math.random() * colCount) * delayPos;
   }
-  /*ここに演習 6 タスク 3 で loadCheck 関数を記述します。*/
+
+  //ゲームで使用する Splite オブジェクトが準備されたかどうかを判断
+  function loadCheck() {
+    if (sprite.snows.length && sprite.snow_man) {
+      //準備ができたらアニメーションを開始
+      window.requestAnimationFrame(renderFrame);
+    } else {
+      //まだの場合はループして待機
+      window.requestAnimationFrame(loadCheck);
+    }
+  }
 })();
