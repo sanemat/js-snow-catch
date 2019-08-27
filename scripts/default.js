@@ -94,7 +94,25 @@
     return (containerWidth / 2) - (itemWidth / 2);
   }
 
-  /*ここに演習 3 タスク 1 で renderFrame関数を記述します。*/
+  function renderFrame() {
+    //sprite.snow の y 値(縦位置) が canvas からはみ出たら先頭に戻す
+    if (sprite.snow.y > canvas.clientHeight) {
+      sprite.snow.y = 0
+    }
+    //canvas をクリア
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //sprite.snow の y 値を増分
+    sprite.snow.y += 2;
+    /*ここに演習 4 タスク 1 手順 6 のコードを追記します。*/
+    //Spriteを描画
+    sprite.snow.draw();
+    sprite.snow_man.draw();
+    /*ここに演習 5 isHit関数を呼び出すコードを追加します*/
+    /*ここに演習 7 のタスク 1 手順 7 で処理数のカウントを追加します*/
+    //ループを開始
+    requestId = window.requestAnimationFrame(renderFrame);
+  }
+
   /*ここに演習 4 タスク 1 で getRightLimitPosition関数を記述します。*/
   /*ここに演習 5 で isHit 関数を記述します。*/
   /*ここに演習 5 で hitJob 関数を記述します。*/
