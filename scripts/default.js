@@ -65,15 +65,22 @@
       /*ここは演習 7 のタスク 1 手順 3 で変更されます*/
       //画像を引数に Sprite クラスのインスタンスを生成
       sprite.snow = new Sprite(img.snow);
-      sprite.snow.x = 0; //ここは演習 2 タスク 3 で書き換えます
+
+      //以下の行が書き換えた箇所です
+      sprite.snow.x = getCenterPosition(canvas.clientWidth, sprite.snow.width);
+
       sprite.snow.y = 0;
       //Sprite オブジェクトに定義した draw メソッドで描画
       sprite.snow.draw();
-    };
-    //ここに演習 2 タスク 3 の雪だるま画像をロードする処理を記述します。
+    };    //ここに演習 2 タスク 3 の雪だるま画像をロードする処理を記述します。
   };
   /*ここに演習 4 タスク 1 で setHandlers 関数を記述します。*/
-  /*ここに演習 2 タスク 2 で getCenterPosition関数を記述します。*/
+
+  //中央の Left 位置を求める関数
+  function getCenterPosition(containerWidth, itemWidth) {
+    return (containerWidth / 2) - (itemWidth / 2);
+  }
+
   /*ここに演習 3 タスク 1 で renderFrame関数を記述します。*/
   /*ここに演習 4 タスク 1 で getRightLimitPosition関数を記述します。*/
   /*ここに演習 5 で isHit 関数を記述します。*/
