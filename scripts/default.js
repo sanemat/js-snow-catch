@@ -100,7 +100,22 @@
       sprite.snow_man.draw();
     };
   };
-  /*ここに演習 4 タスク 1 で setHandlers 関数を記述します。*/
+
+  function setHandlers() {
+    //キーイベントの取得 (キーダウン)
+    document.addEventListener('keydown', (evnt) => {
+      if (evnt.which === KEY_CODE.left) {
+        key_value = -3;
+      } else if (evnt.which === KEY_CODE.right) {
+        key_value = 3;
+      }
+    });
+    //雪だるまが進みっぱなしにならないように、 キーが上がったら 0 に
+    document.addEventListener('keyup', () => {
+      key_value = 0;
+    });
+    /* ここに演習 4 のタスク 2 でタッチイベントのハンドラを記述*/
+  };
 
   //中央の Left 位置を求める関数
   function getCenterPosition(containerWidth, itemWidth) {
