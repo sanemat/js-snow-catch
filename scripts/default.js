@@ -1,7 +1,14 @@
 (function () {
   //全体で使用する変数
-  /*ここに演習 4 タスク 1 で変数を追加します。*/
-//全体で使用する変数
+  //矢印キーのコード
+  let KEY_CODE = {
+    left: 37, right: 39
+  };
+  //取得したキーの値
+  let key_value = 0;
+  //タッチ開始時の位置
+  let touchStartPos = 0;
+  //全体で使用する変数
   let canvas;
   let ctx;
   let img = {snow: null, snow_man: null};
@@ -9,7 +16,7 @@
   //DOM のロードが完了したら実行
   document.addEventListener('DOMContentLoaded', () => {
     loadAssets();
-    /*ここに演習 4 タスク 1 で setHandlers 関数の呼び出しを記述します*/
+    setHandlers();
   });
 
   //Sprite クラスの定義
@@ -88,12 +95,28 @@
       sprite.snow_man.x = getCenterPosition(canvas.clientWidth, sprite.snow_man.width);
       //雪だるま画像は、表示領域の底辺に画像の底辺がつくように
       sprite.snow_man.y = canvas.clientHeight - sprite.snow_man.height;
-      /*ここに演習 4 のタスク 1 で
-      getRightLimitPosition 関数を使用した処理を記述します*/
+      //右側に動かせる最大値を設定
+      sprite.snow_man.limit_rightPosition = getRightLimitPosition(
+        canvas.clientWidth, sprite.snow_man.width);
       sprite.snow_man.draw();
     };
   };
-  /*ここに演習 4 タスク 1 で setHandlers 関数を記述します。*/
+
+  function setHandlers() {
+    //キーイベントの取得 (キーダウン)
+    document.addEventListener('keydown', (evnt) => {
+      if (evnt.which === KEY_CODE.left) {
+        key_value = -3;
+      } else if (evnt.which === KEY_CODE.right) {
+        key_value = 3;
+      }
+    });
+    //雪だるまが進みっぱなしにならないように、 キーが上がったら 0 に
+    document.addEventListener('keyup', () => {
+      key_value = 0;
+    });
+    /* ここに演習 4 のタスク 2 でタッチイベントのハンドラを記述*/
+  };
 
   //中央の Left 位置を求める関数
   function getCenterPosition(containerWidth, itemWidth) {
@@ -109,7 +132,12 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     //sprite.snow の y 値を増分
     sprite.snow.y += 2;
-    /*ここに演習 4 タスク 1 手順 6 のコードを追記します。*/
+    // sprite.snow_man の x 値が動作範囲内かどうか
+    if ((sprite.snow_man.x < sprite.snow_man.limit_rightPosition && key_value > 0)
+      || (sprite.snow_man.x >= 3 && key_value < 0)) {
+      //sprite.snow_man の x 値を増分
+      sprite.snow_man.x += key_value;
+    }
     //Spriteを描画
     sprite.snow.draw();
     sprite.snow_man.draw();
@@ -119,7 +147,11 @@
     requestId = window.requestAnimationFrame(renderFrame);
   }
 
-  /*ここに演習 4 タスク 1 で getRightLimitPosition関数を記述します。*/
+  //雪だるまを動かせる右の限界位置を算出する
+  function getRightLimitPosition(containerWidth, itemWidth) {
+    return containerWidth - itemWidth;
+  }
+
   /*ここに演習 5 で isHit 関数を記述します。*/
   /*ここに演習 5 で hitJob 関数を記述します。*/
   /*ここに演習 6 タスク 2 で getRandomPosition 関数を記述します。*/
