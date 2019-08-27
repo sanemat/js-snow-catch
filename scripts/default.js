@@ -72,7 +72,20 @@
       sprite.snow.y = 0;
       //Sprite オブジェクトに定義した draw メソッドで描画
       sprite.snow.draw();
-    };    //ここに演習 2 タスク 3 の雪だるま画像をロードする処理を記述します。
+    };
+    //雪だるまインスタンスの生成
+    img.snow_man = new Image();
+    img.snow_man.src = './img/snow_man.png';
+    img.snow_man.onload = () => {
+      /*このハンドラの処理は演習 6 のタスク 1 手順 3 で書き換えます*/
+      sprite.snow_man = new Sprite(img.snow_man);
+      sprite.snow_man.x = getCenterPosition(canvas.clientWidth, sprite.snow_man.width);
+      //雪だるま画像は、表示領域の底辺に画像の底辺がつくように
+      sprite.snow_man.y = canvas.clientHeight - sprite.snow_man.height;
+      /*ここに演習 4 のタスク 1 で
+      getRightLimitPosition 関数を使用した処理を記述します*/
+      sprite.snow_man.draw();
+    };
   };
   /*ここに演習 4 タスク 1 で setHandlers 関数を記述します。*/
 
