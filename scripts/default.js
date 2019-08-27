@@ -51,7 +51,13 @@
     /*ここに演習 8 で Rule クラスのインスタンスを生成するコードを記述します*/
     //HTML ファイル上の canvas エレメントのインスタンスを取得
     canvas = document.getElementById('bg');
-    /*ここに演習 3 タスク 1 で Click イベントハンドラ処理を追加します*/
+    //アニメーションの開始
+    canvas.addEventListener('click', () => {
+      /*演習 6 のタスク 3 で loadCheck 関数を呼び出すように変更されます*/
+      if (!requestId) {
+        renderFrame();
+      }
+    });
     //2D コンテキストを取得
     ctx = canvas.getContext('2d');
     //image オブジェクトのインスタンスを生成
@@ -94,7 +100,25 @@
     return (containerWidth / 2) - (itemWidth / 2);
   }
 
-  /*ここに演習 3 タスク 1 で renderFrame関数を記述します。*/
+  function renderFrame() {
+    //sprite.snow の y 値(縦位置) が canvas からはみ出たら先頭に戻す
+    if (sprite.snow.y > canvas.clientHeight) {
+      sprite.snow.y = 0
+    }
+    //canvas をクリア
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //sprite.snow の y 値を増分
+    sprite.snow.y += 2;
+    /*ここに演習 4 タスク 1 手順 6 のコードを追記します。*/
+    //Spriteを描画
+    sprite.snow.draw();
+    sprite.snow_man.draw();
+    /*ここに演習 5 isHit関数を呼び出すコードを追加します*/
+    /*ここに演習 7 のタスク 1 手順 7 で処理数のカウントを追加します*/
+    //ループを開始
+    requestId = window.requestAnimationFrame(renderFrame);
+  }
+
   /*ここに演習 4 タスク 1 で getRightLimitPosition関数を記述します。*/
   /*ここに演習 5 で isHit 関数を記述します。*/
   /*ここに演習 5 で hitJob 関数を記述します。*/
