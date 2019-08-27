@@ -11,8 +11,38 @@
     loadAssets();
     /*ここに演習 4 タスク 1 で setHandlers 関数の呼び出しを記述します*/
   });
-  /*ここに演習 2 のタスク 2 で Sprite クラスを定義します*/
-  /*ここに演習 2 タスク 2 で Sprite クラス(関数) のインスタンスを格納するための変数オブジェクトを定義します*/
+
+  //Sprite クラスの定義
+  class Sprite {
+    constructor(img) {
+      this.image = img; //image オブジェクト
+      this.height = img.height;
+      this.width = img.width;
+      this.x = 0; //表示位置 x
+      this.y = 0; //表示位置 y
+      this.dx = 0; //移動量 x
+      this.dy = 0; //移動量 y
+      this._imageIndex = 0;
+      this._offset_x_pos = 0;
+      /*ここに演習 7 のタスク 2 でオーディオ再生用の
+     プロパティを追加します*/
+      //Sprite を描画するメソッド
+      this.draw = () => {
+        ctx.drawImage(img, this.x, this.y);
+      };
+    }
+
+    /*ここに演習 7 のタスク 1 で Getter と Setter の
+       コードを追加します*/
+  }
+
+  //Sprite を扱う変数オブジェクト
+  let sprite = {
+    //雪の結晶 Sprite が格納
+    snow: null,
+    //雪だるまの Sprite が格納
+    snow_man: null
+  };
   /*ここに演習 6 タスク 1 で SNOWS_MOVING_CON オブジェクト変数を定義します。*/
   /*ここに演習 8 で Rule クラスを定義します*/
 
@@ -31,9 +61,14 @@
     /*画像読み込み完了の Canvas に
     画像を表示するメソッドを記述 */
     img.snow.onload = () => {
-      /*ここは演習 2 タスク 2 でハンドラ内のコードを完全に書き換えます*/
-      //canvas 上で image を描画
-      ctx.drawImage(img.snow, 0, 0);
+      /*このハンドラの処理は演習 6 のタスク 1 手順 3 で書き換えます*/
+      /*ここは演習 7 のタスク 1 手順 3 で変更されます*/
+      //画像を引数に Sprite クラスのインスタンスを生成
+      sprite.snow = new Sprite(img.snow);
+      sprite.snow.x = 0; //ここは演習 2 タスク 3 で書き換えます
+      sprite.snow.y = 0;
+      //Sprite オブジェクトに定義した draw メソッドで描画
+      sprite.snow.draw();
     };
     //ここに演習 2 タスク 3 の雪だるま画像をロードする処理を記述します。
   };
