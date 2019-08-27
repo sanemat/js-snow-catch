@@ -16,7 +16,7 @@
   //DOM のロードが完了したら実行
   document.addEventListener('DOMContentLoaded', () => {
     loadAssets();
-    /*ここに演習 4 タスク 1 で setHandlers 関数の呼び出しを記述します*/
+    setHandlers();
   });
 
   //Sprite クラスの定義
