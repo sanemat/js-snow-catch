@@ -115,7 +115,18 @@
     document.addEventListener('keyup', () => {
       key_value = 0;
     });
-    /* ここに演習 4 のタスク 2 でタッチイベントのハンドラを記述*/
+    //Canvas へのタッチイベント設定
+    canvas.addEventListener('touchstart', (evnt) => {
+      touchStartPos = evnt.touches[0].clientX;
+    });
+//左右のスワイプ量を雪だるまの移動量に
+    canvas.addEventListener('touchmove', (evnt) => {
+      key_value = Math.round((evnt.touches[0].clientX - touchStartPos) / 10);
+    });
+//雪だるまが進みっぱなしにならないように、 タッチが完了したら 0 に
+    canvas.addEventListener('touchend', (evnt) => {
+      key_value = 0;
+    });
   };
 
   //中央の Left 位置を求める関数
