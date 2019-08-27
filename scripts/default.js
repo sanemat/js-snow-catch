@@ -1,7 +1,14 @@
 (function () {
   //全体で使用する変数
-  /*ここに演習 4 タスク 1 で変数を追加します。*/
-//全体で使用する変数
+  //矢印キーのコード
+  let KEY_CODE = {
+    left: 37, right: 39
+  };
+  //取得したキーの値
+  let key_value = 0;
+  //タッチ開始時の位置
+  let touchStartPos = 0;
+  //全体で使用する変数
   let canvas;
   let ctx;
   let img = {snow: null, snow_man: null};
