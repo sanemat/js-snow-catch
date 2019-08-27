@@ -51,7 +51,13 @@
     /*ここに演習 8 で Rule クラスのインスタンスを生成するコードを記述します*/
     //HTML ファイル上の canvas エレメントのインスタンスを取得
     canvas = document.getElementById('bg');
-    /*ここに演習 3 タスク 1 で Click イベントハンドラ処理を追加します*/
+    //アニメーションの開始
+    canvas.addEventListener('click', () => {
+      /*演習 6 のタスク 3 で loadCheck 関数を呼び出すように変更されます*/
+      if (!requestId) {
+        renderFrame();
+      }
+    });
     //2D コンテキストを取得
     ctx = canvas.getContext('2d');
     //image オブジェクトのインスタンスを生成
