@@ -61,9 +61,14 @@
     /*画像読み込み完了の Canvas に
     画像を表示するメソッドを記述 */
     img.snow.onload = () => {
-      /*ここは演習 2 タスク 2 でハンドラ内のコードを完全に書き換えます*/
-      //canvas 上で image を描画
-      ctx.drawImage(img.snow, 0, 0);
+      /*このハンドラの処理は演習 6 のタスク 1 手順 3 で書き換えます*/
+      /*ここは演習 7 のタスク 1 手順 3 で変更されます*/
+      //画像を引数に Sprite クラスのインスタンスを生成
+      sprite.snow = new Sprite(img.snow);
+      sprite.snow.x = 0; //ここは演習 2 タスク 3 で書き換えます
+      sprite.snow.y = 0;
+      //Sprite オブジェクトに定義した draw メソッドで描画
+      sprite.snow.draw();
     };
     //ここに演習 2 タスク 3 の雪だるま画像をロードする処理を記述します。
   };
